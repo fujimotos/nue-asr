@@ -64,15 +64,15 @@ def load_model(
     device = torch.device(device)
     if device.type == "cpu":
         if torch.cuda.is_available():
-            logging.warning(
+            logger.warning(
                 "CUDA is available but using CPU. "
                 "If you want to use CUDA, set `device` to `cuda`."
             )
         if fp16:
-            logging.warning("FP16 is not supported on CPU. Using FP32 instead.")
+            logger.warning("FP16 is not supported on CPU. Using FP32 instead.")
             fp16 = False
         if use_deepspeed:
-            logging.warning("DeepSpeed is not supported on CPU. Disabling it.")
+            logger.warning("DeepSpeed is not supported on CPU. Disabling it.")
             use_deepspeed = False
 
     dtype = torch.float16 if fp16 else torch.float32
